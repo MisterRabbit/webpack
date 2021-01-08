@@ -13,6 +13,7 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
     port: 8080,
@@ -30,8 +31,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /\.(s[ac]ss|css)$/i,
+        // use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader",],
+        use: [MiniCssExtractPlugin.loader, {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+            },
+          }
+          , {
+            loader: "sass-loader",
+            options: {
+              // Prefer `dart-sass`
+              sourceMap: true
+            },
+          },
+        ],
       },
       {
         test: /\.m?js$/,

@@ -2,6 +2,7 @@ import AppService from './modules/app.service'
 import { config } from './modules/config';
 import './modules/header.component'
 import './styles/main.css'
+import './styles/main.scss'
 
 console.log('Config key:' + config.key);
 
